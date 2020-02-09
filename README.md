@@ -66,7 +66,7 @@ Haiku.call
 ```
 
 If you're planning to use a haiku as some unique value on your database, you can
-use `Haiku.next(options, &block)`; a new haiku will be generate until
+use `Haiku.next(options, &block)`; a new haiku will be generated until
 `block.call(haiku)` returns `false`. For instance, this is how you'd use it with
 ActiveRecord:
 
