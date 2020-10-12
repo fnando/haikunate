@@ -59,10 +59,10 @@ To override the dictionary list, use `Haiku.adjectives=(list)` and
 
 ```ruby
 Haiku.adjectives = %w[awful terrible crazy]
-Haiku.nouns = %w[lawyer judge politian]
+Haiku.nouns = %w[lawyer judge politician]
 
 Haiku.call
-#=> terrible-politian-8116
+#=> terrible-politician-8116
 ```
 
 If you're planning to use a haiku as some unique value on your database, you can
@@ -104,8 +104,8 @@ git commits and tags, and push the `.gem` file to
 Bug reports and pull requests are welcome on GitHub at
 https://github.com/fnando/haikunate. This project is intended to be a safe,
 welcoming space for collaboration, and contributors are expected to adhere to
-the [code of conduct](https://github.com/fnando/haikunate/blob/master/CODE_OF_CONDUCT.md).
-
+the
+[code of conduct](https://github.com/fnando/haikunate/blob/master/CODE_OF_CONDUCT.md).
 
 ## License
 
