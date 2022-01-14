@@ -7,8 +7,7 @@ module Haikunate
   require "haikunate/version"
 
   class << self
-    attr_accessor :default_range
-    attr_accessor :default_variant
+    attr_accessor :default_range, :default_variant
   end
 
   self.default_range = 1000..9999
@@ -38,9 +37,9 @@ module Haikunate
     [adjectives.sample, nouns.sample, variant.call].join(joiner)
   end
 
-  def self.next(joiner: "-", variant: default_variant, &block)
+  def self.next(joiner: "-", variant: default_variant)
     options = {joiner: joiner, variant: variant}
-    name = call(**options) while !name || block.call(name)
+    name = call(**options) while !name || yield(name)
     name
   end
 end

@@ -1,6 +1,10 @@
-# Haikunate
+# haikunate
 
 Generate Heroku-like memorable random names like `adorable-ox-1234`.
+
+[![Tests](https://github.com/fnando/haikunate/workflows/ruby-tests/badge.svg)](https://github.com/fnando/haikunate)
+[![Gem](https://img.shields.io/gem/v/haikunate.svg)](https://rubygems.org/gems/haikunate)
+[![Gem](https://img.shields.io/gem/dt/haikunate.svg)](https://rubygems.org/gems/haikunate)
 
 ## Installation
 
@@ -87,33 +91,27 @@ You can override the default variant generator by setting
 Haiku.default_variant = -> { SecureRandom.alphanumeric(6).downcase }
 ```
 
-## Development
+## Maintainer
 
-After checking out the repo, run `bin/setup` to install dependencies. Then, run
-`rake test` to run the tests. You can also run `bin/console` for an interactive
-prompt that will allow you to experiment.
+- [Nando Vieira](https://github.com/fnando)
 
-To install this gem onto your local machine, run `bundle exec rake install`. To
-release a new version, update the version number in `version.rb`, and then run
-`bundle exec rake release`, which will create a git tag for the version, push
-git commits and tags, and push the `.gem` file to
-[rubygems.org](https://rubygems.org).
+## Contributors
+
+- https://github.com/fnando/haikunate/contributors
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at
-https://github.com/fnando/haikunate. This project is intended to be a safe,
-welcoming space for collaboration, and contributors are expected to adhere to
-the
-[code of conduct](https://github.com/fnando/haikunate/blob/master/CODE_OF_CONDUCT.md).
+For more details about how to contribute, please read
+https://github.com/fnando/haikunate/blob/main/CONTRIBUTING.md.
 
 ## License
 
 The gem is available as open source under the terms of the
-[MIT License](https://opensource.org/licenses/MIT).
+[MIT License](https://opensource.org/licenses/MIT). A copy of the license can be
+found at https://github.com/fnando/haikunate/blob/main/LICENSE.md.
 
 ## Code of Conduct
 
-Everyone interacting in the Haikunate project's codebases, issue trackers, chat
+Everyone interacting in the haikunate project's codebases, issue trackers, chat
 rooms and mailing lists is expected to follow the
-[code of conduct](https://github.com/fnando/haikunate/blob/master/CODE_OF_CONDUCT.md).
+[code of conduct](https://github.com/fnando/haikunate/blob/main/CODE_OF_CONDUCT.md).
