@@ -7,7 +7,7 @@ Gem::Specification.new do |spec|
   spec.version       = Haikunate::VERSION
   spec.authors       = ["Nando Vieira"]
   spec.email         = ["me@fnando.com"]
-  spec.required_ruby_version = Gem::Requirement.new(">= 2.7.0")
+  spec.required_ruby_version = Gem::Requirement.new(">= 3.3.0")
 
   spec.summary =
     "Generate Heroku-like memorable random names like adorable-ox-1234."

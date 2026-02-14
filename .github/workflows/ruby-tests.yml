@@ -19,7 +19,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        ruby: ["2.7", "3.0", "3.1"]
+        ruby: ["3.3", "3.4", "4.0"]
         gemfile:
           - Gemfile
 
@@ -31,7 +31,6 @@ jobs:
           path: vendor/bundle
           key: >
             ${{ runner.os }}-${{ matrix.ruby }}-gems-${{ hashFiles(matrix.gemfile) }}
-
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
