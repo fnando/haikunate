@@ -39,9 +39,17 @@ Haiku.call(joiner: ".")
 #=> passionate.alpaca.7619
 ```
 
-A haiku composed by `adjective-noun-variant`, where variant is a random number
-within `1000..9999` range. You can override the range by setting
-`Haiku.default_range`.
+A haiku is composed by `adjective-noun-variant`.
+
+| Collision namespace              | Size                              |
+| -------------------------------- | --------------------------------- |
+| `nouns-adjectives-(0000-9999)`   | `233 x 380 x 9,000 (~797MM)`      |
+| `nouns-adjectives-(00000-99999)` | `233 x 380 x 90,000 (~7.97B)`     |
+| `nouns-adjectives-(hex5)`        | `233 x 380 x 1,048,576 (~92.84B)` |
+| `nouns-adjectives-(base36(5))`   | `233 x 380 x 60,466,176 (~5.35T)` |
+
+By default, variant is a random number within `1000..9999` range. You can
+override the range by setting `Haiku.default_range`.
 
 ```ruby
 Haiku.default_range = 10_000..99_999
