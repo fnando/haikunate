@@ -3,6 +3,11 @@
 require "test_helper"
 
 class HaikunateTest < Minitest::Test
+  setup do
+    Haiku.default_range = 1000..9999
+    Haiku.default_variant = -> { rand(Haiku.default_range) }
+  end
+
   test "generates string using default options" do
     haiku = Haiku.call
     adjective, noun, variant = haiku.split("-")
@@ -32,14 +37,40 @@ class HaikunateTest < Minitest::Test
     variants = %w[1234 1234 9999]
     bucket = %w[helpful-fox-1234]
 
-    Haiku.stub :adjectives, %w[helpful] do
-      Haiku.stub :nouns, %w[fox] do
-        haiku = Haiku.next(variant: -> { variants.shift }) do |new_haiku|
-          bucket.include?(new_haiku)
-        end
+    Haiku.stubs(:adjectives).returns(%w[helpful])
+    Haiku.stubs(:nouns).returns(%w[fox])
 
-        assert_equal "helpful-fox-9999", haiku
-      end
+    haiku = Haiku.next(variant: -> { variants.shift }) do |new_haiku|
+      bucket.include?(new_haiku)
     end
+
+    assert_equal "helpful-fox-9999", haiku
+  end
+
+  test "generates base36 token with default size" do
+    assert_match(/^[0-9a-z]{5}$/, Haiku.random_base36)
+  end
+
+  test "generates base36 token from per-character random picks" do
+    picks = [0, 1, 10, 35, 5]
+    SecureRandom.stubs(:random_number).with(36).returns(*picks)
+
+    assert_equal "01az5", Haiku.random_base36
+  end
+
+  test "uses base36 variant" do
+    Haiku.stubs(:adjectives).returns(%w[helpful])
+    Haiku.stubs(:nouns).returns(%w[fox])
+    Haiku.default_variant = Haiku.base36_variant_generator
+
+    assert_match(/\Ahelpful-fox-.{5}\z/, Haiku.call)
+  end
+
+  test "uses base36 variant with custom size" do
+    Haiku.stubs(:adjectives).returns(%w[helpful])
+    Haiku.stubs(:nouns).returns(%w[fox])
+    Haiku.default_variant = Haiku.base36_variant_generator(10)
+
+    assert_match(/\Ahelpful-fox-.{10}\z/, Haiku.call)
   end
 end

@@ -13,6 +13,15 @@ module Haikunate
   self.default_range = 1000..9999
   self.default_variant = -> { rand(default_range) }
 
+  def self.random_base36(size = 5)
+    alphabet = "0123456789abcdefghijklmnopqrstuvwxyz"
+    Array.new(size) { alphabet[SecureRandom.random_number(36)] }.join
+  end
+
+  def self.base36_variant_generator(size = 5)
+    -> { random_base36(size) }
+  end
+
   def self.data_dir
     @data_dir ||= Pathname.new(File.expand_path("#{__dir__}/../data"))
   end

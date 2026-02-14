@@ -32,14 +32,14 @@ Haiku.call
 #=> satisfied-eagle-7977
 ```
 
-You can change the joiner string by provider the option `joiner`.
+You can change the joiner string by providing the option `joiner`.
 
 ```ruby
 Haiku.call(joiner: ".")
 #=> passionate.alpaca.7619
 ```
 
-A haiku is composed by `adjective-noun-variant`.
+A haiku is composed of `adjective-noun-variant`.
 
 | Collision namespace              | Size                              |
 | -------------------------------- | --------------------------------- |
@@ -48,7 +48,7 @@ A haiku is composed by `adjective-noun-variant`.
 | `nouns-adjectives-(hex5)`        | `233 x 380 x 1,048,576 (~92.84B)` |
 | `nouns-adjectives-(base36(5))`   | `233 x 380 x 60,466,176 (~5.35T)` |
 
-By default, variant is a random number within `1000..9999` range. You can
+By default, the variant is a random number within `1000..9999` range. You can
 override the range by setting `Haiku.default_range`.
 
 ```ruby
@@ -60,10 +60,11 @@ Alternatively, you can provide a `variant` option, which can be any object that
 responds to `.call()`.
 
 ```ruby
-require "securerandom"
+Haiku.call(variant: Haiku.base36_variant_generator)
+#=> tidy-skunk-1az9k
 
-Haiku.call(variant: -> { SecureRandom.alphanumeric(5).downcase })
-#=> tidy-skunk-s8ln0
+Haiku.call(variant: Haiku.base36_variant_generator(10))
+#=> tidy-skunk-k8w0mz3q2a
 ```
 
 To override the dictionary list, use `Haiku.adjectives=(list)` and
@@ -77,7 +78,7 @@ Haiku.call
 #=> terrible-politician-8116
 ```
 
-If you're planning to use a haiku as some unique value on your database, you can
+If you're planning to use a haiku as a unique value in your database, you can
 use `Haiku.next(options, &block)`; a new haiku will be generated until
 `block.call(haiku)` returns `false`. For instance, this is how you'd use it with
 ActiveRecord:
@@ -88,15 +89,16 @@ site.slug = Haiku.next {|slug| Site.where(slug: slug).exists? }
 site.save!
 ```
 
-That can be a problem for databases with lots and lots of records. If that's the
-case, you can then use a more random variant like 6 random alphanumeric
-characters.
+That can be a problem for very large databases. If that's the case, you can then
+use a more random variant like 6 random alphanumeric characters.
 
 You can override the default variant generator by setting
 `Haiku.default_variant=(new_variant)`.
 
 ```ruby
-Haiku.default_variant = -> { SecureRandom.alphanumeric(6).downcase }
+Haiku.default_variant = Haiku.base36_variant_generator
+# or with custom size:
+Haiku.default_variant = Haiku.base36_variant_generator(10)
 ```
 
 ## Maintainer
